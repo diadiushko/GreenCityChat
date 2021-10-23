@@ -38,7 +38,7 @@ public class ChatController {
         return chatService.saveChat(chat);
     }
 
-    @PostMapping("/{chatId}/participant/{userId}")
+    @PutMapping("/{chatId}/participant/{userId}")
     public void addParticipant(@PathVariable int chatId, @PathVariable int userId) {
         chatService.addParticipant(chatId, userId);
     }

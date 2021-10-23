@@ -29,7 +29,7 @@ public class Chat {
     @Column(name = "last_message_date")
     private Timestamp lastMessageDate;
 
-    //    @JsonIgnore
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "chat_id")
     private List<Message> messages;

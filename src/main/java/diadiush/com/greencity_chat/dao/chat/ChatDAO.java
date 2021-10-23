@@ -16,4 +16,6 @@ public interface ChatDAO {
     void deleteChat(int id);
 
     void addParticipant(int chatId, int userId);
+
+    void deleteAllChatMessages(int id);
 }

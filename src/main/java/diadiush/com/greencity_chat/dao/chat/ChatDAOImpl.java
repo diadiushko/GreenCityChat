@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Repository
-public class ChatDAOImpl implements ChatDAO{
+public class ChatDAOImpl implements ChatDAO {
 
     private final EntityManager entityManager;
 
@@ -45,8 +45,16 @@ public class ChatDAOImpl implements ChatDAO{
 
     @Override
     public void deleteChat(int id) {
-        Query deleteChatByIdQuery = entityManager.createQuery("DELETE Chat WHERE id=:id");
-        deleteChatByIdQuery.setParameter("id", id);
-        deleteChatByIdQuery.executeUpdate();
+
+        entityManager.createQuery("DELETE Chat WHERE id=:id")
+                .setParameter("id", id)
+                .executeUpdate();
+    }
+
+    @Override
+    public void deleteAllChatMessages(int id) {
+        entityManager.createQuery("DELETE Message WHERE chatId=:id")
+                .setParameter("id", id)
+                .executeUpdate();
     }
 }

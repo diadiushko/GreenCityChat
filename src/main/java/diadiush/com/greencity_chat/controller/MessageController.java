@@ -33,9 +33,8 @@ public class MessageController {
         return messageService.addMessage( message);
     }
 
-    // TODO cant update  Cannot add or update a child row: a foreign key constraint fails
     @PutMapping("")
-    public Message changeMessage(Message message) {
+    public Message changeMessage(@RequestBody Message message) {
         return messageService.changeMessage(message);
     }
 

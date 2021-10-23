@@ -53,6 +53,7 @@ public class ChatServiceImpl implements ChatService {
     @Override
     @Transactional
     public void deleteChat(int id) {
+        chatDAO.deleteAllChatMessages(id);
         chatDAO.deleteChat(id);
     }
 }

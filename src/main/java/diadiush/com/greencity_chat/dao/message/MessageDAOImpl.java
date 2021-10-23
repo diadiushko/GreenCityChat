@@ -1,8 +1,6 @@
 package diadiush.com.greencity_chat.dao.message;
 
-import diadiush.com.greencity_chat.entity.Chat;
 import diadiush.com.greencity_chat.entity.Message;
-import diadiush.com.greencity_chat.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +20,7 @@ public class MessageDAOImpl implements MessageDAO{
 
     @Override
     public List<Message> getAllMessagesByChatId(int chatId) {
-        Query allMessagesByChatIdQuery = entityManager.createQuery("FROM Message WHERE chat=:chatId");
+        Query allMessagesByChatIdQuery = entityManager.createQuery("FROM Message WHERE chatId=:chatId");
         allMessagesByChatIdQuery.setParameter("chatId", chatId);
         return allMessagesByChatIdQuery.getResultList();
     }
@@ -34,7 +32,7 @@ public class MessageDAOImpl implements MessageDAO{
 
     @Override
     public Message changeMessage(Message message) {
-        return entityManager.merge(message);
+        return addMessage(message);
     }
 
     @Override
