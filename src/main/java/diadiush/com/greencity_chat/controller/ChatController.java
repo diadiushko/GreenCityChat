@@ -1,9 +1,10 @@
 package diadiush.com.greencity_chat.controller;
 
 import diadiush.com.greencity_chat.entity.Chat;
-import diadiush.com.greencity_chat.exception_hander.NoSuchChatException;
 import diadiush.com.greencity_chat.service.chat.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,10 +22,6 @@ public class ChatController {
 
     @GetMapping("/{chatId}")
     public Chat getChatById(@PathVariable int chatId) {
-        Chat chatById = chatService.getChatByID(chatId);
-        if(chatById == null) {
-            throw new NoSuchChatException("There is no chat with ID=" + chatId + " in Database.");
-        }
         return chatService.getChatByID(chatId);
     }
 
@@ -41,6 +38,12 @@ public class ChatController {
     @PutMapping("/{chatId}/participant/{userId}")
     public void addParticipant(@PathVariable int chatId, @PathVariable int userId) {
         chatService.addParticipant(chatId, userId);
+    }
+
+    @MessageMapping("/sos")
+    @SendTo("/hello")
+    public String func() {
+        return "hello";
     }
 
     @PutMapping("")
