@@ -41,9 +41,10 @@ public class ChatController {
     }
 
     @MessageMapping("/sos")
-    @SendTo("/hello")
-    public String func() {
-        return "hello";
+    @SendTo("/message/hello")
+    public String func(String input) {
+        System.out.println(input);
+        return input;
     }
 
     @PutMapping("")
