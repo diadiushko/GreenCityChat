@@ -30,6 +30,7 @@ public class Chat {
     private Timestamp lastMessageDate;
 
     @JsonIgnore
+    // deleted every message with , orphanRemoval = true
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "chat_id")
     private List<Message> messages;

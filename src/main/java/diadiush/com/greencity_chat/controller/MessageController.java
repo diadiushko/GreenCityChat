@@ -1,8 +1,10 @@
 package diadiush.com.greencity_chat.controller;
 
 import diadiush.com.greencity_chat.entity.Message;
+import diadiush.com.greencity_chat.entity.User;
 import diadiush.com.greencity_chat.service.message.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,9 +30,12 @@ public class MessageController {
         return messageService.findMessageById(messageId);
     }
 
-    @PostMapping("")
-    public Message addMessage(@RequestBody Message message) {
-        return messageService.addMessage( message);
+    @MessageMapping("/addMessage")
+    @SendTo("/message/chat-messages")
+    public Message addMessage(@Payload Message message) {
+        Message result = messageService.addMessage(message);
+        System.out.println(result);
+        return result;
     }
 
     @PutMapping("")

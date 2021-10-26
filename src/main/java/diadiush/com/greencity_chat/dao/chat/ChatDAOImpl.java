@@ -1,6 +1,7 @@
 package diadiush.com.greencity_chat.dao.chat;
 
 import diadiush.com.greencity_chat.entity.Chat;
+import diadiush.com.greencity_chat.entity.Message;
 import diadiush.com.greencity_chat.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,6 +34,12 @@ public class ChatDAOImpl implements ChatDAO {
 
     @Override
     public Chat saveOrUpdateChat(Chat chat) {
+        if (chat.getId() != 0) {
+            List<Message> messages = entityManager.createQuery("FROM Message WHERE chatId=:chatId")
+                    .setParameter("chatId", chat.getId())
+                    .getResultList();
+            chat.setMessages(messages);
+        }
         return entityManager.merge(chat);
     }
 

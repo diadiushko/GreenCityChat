@@ -41,7 +41,7 @@ public class ChatServiceImpl implements ChatService {
     public Chat updateChat(Chat chat) {
         Chat existingChat = chatDAO.getChatByID(chat.getId());
         chat.setParticipants(existingChat.getParticipants());
-        return chat;
+        return chatDAO.saveOrUpdateChat(chat);
     }
 
     @Override

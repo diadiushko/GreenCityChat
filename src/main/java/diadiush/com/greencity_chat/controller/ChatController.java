@@ -40,13 +40,6 @@ public class ChatController {
         chatService.addParticipant(chatId, userId);
     }
 
-    @MessageMapping("/sos")
-    @SendTo("/message/hello")
-    public String func(String input) {
-        System.out.println(input);
-        return input;
-    }
-
     @PutMapping("")
     public Chat updateChat(@RequestBody Chat chat) {
         return chatService.updateChat(chat);
