@@ -1,6 +1,7 @@
 package diadiush.com.greencity_chat.service.chat;
 
 import diadiush.com.greencity_chat.entity.Chat;
+import diadiush.com.greencity_chat.entity.User;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface ChatService {
 
     Chat updateChat(Chat chat);
 
-    void addParticipant(int chatId, int userId);
+    User addParticipant(int chatId, int userId);
 
     void deleteChat(int id);
 }

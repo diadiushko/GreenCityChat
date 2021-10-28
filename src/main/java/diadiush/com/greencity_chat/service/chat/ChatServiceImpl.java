@@ -2,6 +2,7 @@ package diadiush.com.greencity_chat.service.chat;
 
 import diadiush.com.greencity_chat.dao.chat.ChatDAO;
 import diadiush.com.greencity_chat.entity.Chat;
+import diadiush.com.greencity_chat.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,8 +47,8 @@ public class ChatServiceImpl implements ChatService {
 
     @Override
     @Transactional
-    public void addParticipant(int chatId, int userId) {
-        chatDAO.addParticipant(chatId, userId);
+    public User addParticipant(int chatId, int userId) {
+        return chatDAO.addParticipant(chatId, userId);
     }
 
     @Override

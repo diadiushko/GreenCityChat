@@ -22,7 +22,6 @@ public class MessageDAOImpl implements MessageDAO{
     public List<Message> getAllMessagesByChatId(int chatId) {
         Query allMessagesByChatIdQuery = entityManager.createQuery("FROM Message WHERE chatId=:chatId");
         allMessagesByChatIdQuery.setParameter("chatId", chatId);
-        System.out.println(allMessagesByChatIdQuery.getResultList());
         return allMessagesByChatIdQuery.getResultList();
     }
 

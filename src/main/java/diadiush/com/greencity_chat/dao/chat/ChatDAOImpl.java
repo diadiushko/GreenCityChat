@@ -44,10 +44,11 @@ public class ChatDAOImpl implements ChatDAO {
     }
 
     @Override
-    public void addParticipant(int chatId, int userId) {
+    public User addParticipant(int chatId, int userId) {
         Chat chatToAddParticipants = entityManager.find(Chat.class, chatId);
         User userToAdd = entityManager.find(User.class, userId);
         chatToAddParticipants.getParticipants().add(userToAdd);
+        return userToAdd;
     }
 
     @Override

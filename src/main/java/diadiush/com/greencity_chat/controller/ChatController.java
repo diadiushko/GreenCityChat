@@ -1,9 +1,12 @@
 package diadiush.com.greencity_chat.controller;
 
 import diadiush.com.greencity_chat.entity.Chat;
+import diadiush.com.greencity_chat.entity.User;
 import diadiush.com.greencity_chat.service.chat.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,9 +38,13 @@ public class ChatController {
         return chatService.saveChat(chat);
     }
 
-    @PutMapping("/{chatId}/participant/{userId}")
-    public void addParticipant(@PathVariable int chatId, @PathVariable int userId) {
-        chatService.addParticipant(chatId, userId);
+    @MessageMapping("/{chatId}/participant")
+    @SendTo("/message/new-participant")
+    public User addParticipant(@DestinationVariable int chatId, @Payload int userId) {
+        System.out.println("chatID: " + chatId + " userID" + userId);
+        User result = chatService.addParticipant(chatId, userId);
+        System.out.println("result: " + result);
+        return result;
     }
 
     @PutMapping("")
